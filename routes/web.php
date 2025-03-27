@@ -4,7 +4,9 @@ use App\Livewire\Drivers\Create;
 use App\Livewire\Drivers\Edit;
 use App\Livewire\Drivers\Index;
 use App\Livewire\Users\UsersListing;
-use App\Livewire\Vehicles\VehicleListing;
+use App\Livewire\Vehicles\Index as VehiclesIndex;
+use App\Livewire\Vehicles\Create as VehiclesCreate;
+use App\Livewire\Vehicles\Edit as VehiclesEdit;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -18,16 +20,17 @@ Route::view('dashboard', 'dashboard')
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // VEHICLES
-    Route::get('vehicle', VehicleListing::class)->name('vehicle');
+    Route::prefix('vehicles')->name('vehicle.')->group(function () {
+        Route::get('/', VehiclesIndex::class)->name('index');
+        Route::get('/create', VehiclesCreate::class)->name('create');
+        Route::get('/{vehicle}/edit', VehiclesEdit::class)->name('edit');
+    });
 
     // DRIVERS
     Route::prefix('drivers')->name('driver.')->group(function () {
         Route::get('/', Index::class)->name('index');
         Route::get('/create', Create::class)->name('create');
         Route::get('/{driver}/edit', Edit::class)->name('edit');
-        // Route::get('/{driver}', Show::class)->name('show');
-        // Route::put('/{driver}', Edit::class)->name('update');
-        // Route::delete('/{driver}', Edit::class)->name('destroy');
     });
 
     // USERS

@@ -5,12 +5,12 @@ namespace App\Livewire\Vehicles;
 use App\Models\Vehicle;
 use Livewire\Component;
 
-class VehicleListing extends Component
+class Index extends Component
 {
     public function render()
     {
         $vehicles = Vehicle::paginate();
 
-        return view('livewire.veiculos.listagem-veiculos', compact('vehicles'));
+        return view('livewire.vehicles.index', compact('vehicles'));
     }
 }

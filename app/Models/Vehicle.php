@@ -10,8 +10,9 @@ class Vehicle extends Model
     use HasFactory;
 
     protected $fillable = [
-        'placa',
+        'plate',
         'renavam',
+        'brand',
         'model',
         'year_manufacture',
         'year_model',

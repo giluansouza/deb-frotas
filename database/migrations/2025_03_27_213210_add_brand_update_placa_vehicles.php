@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::table('vehicles', function (Blueprint $table) {
+            $table->renameColumn('placa', 'plate');
+            $table->string('brand');
+        });
     }
 
     /**
@@ -19,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('vehicles', function (Blueprint $table) {
+            $table->dropColumn('brand');
+            $table->renameColumn('plate', 'placa');
+        });
     }
 };

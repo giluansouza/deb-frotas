@@ -19,8 +19,9 @@ class VehicleFactory extends Factory
     public function definition(): array
     {
         return [
-            'model' => fake()->word(),
-            'placa' => fake()->unique()->regexify('[A-Z]{3}[0-9]{4}'),
+            'brand' => fake()->randomElement(['VW', 'Fiat', 'Chevrolet', 'Ford', 'Volvo']),
+            'model' => fake()->randomElement(['Gol', 'Uno', 'Onix', 'Fiesta', 'FH']),
+            'plate' => fake()->unique()->regexify('[A-Z]{3}[0-9]{4}'),
             'year_model' => fake()->year(),
             'year_manufacture' => fake()->year(),
             'renavam' => fake()->numerify('###########'),
