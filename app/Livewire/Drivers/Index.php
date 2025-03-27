@@ -11,6 +11,11 @@ class Index extends Component
     {
         $drivers = Driver::paginate();
 
-        return view('livewire.condutores.listagem-condutores', compact('drivers'));
+        $successMessage = session('success');
+
+        return view('livewire.drivers.index', [
+            'drivers' => Driver::paginate(),
+            'successMessage' => $successMessage,
+        ]);
     }
 }
