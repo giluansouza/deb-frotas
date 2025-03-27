@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Drivers\Create;
+use App\Livewire\Drivers\Edit;
 use App\Livewire\Drivers\Index;
 use App\Livewire\Users\UsersListing;
 use App\Livewire\Vehicles\VehicleListing;
@@ -23,9 +24,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('drivers')->name('driver.')->group(function () {
         Route::get('/', Index::class)->name('index');
         Route::get('/create', Create::class)->name('create');
-        Route::post('/', Create::class)->name('store');
+        Route::get('/{driver}/edit', Edit::class)->name('edit');
         // Route::get('/{driver}', Show::class)->name('show');
-        // Route::get('/{driver}/edit', Edit::class)->name('edit');
         // Route::put('/{driver}', Edit::class)->name('update');
         // Route::delete('/{driver}', Edit::class)->name('destroy');
     });

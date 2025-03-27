@@ -47,7 +47,7 @@
                             @endif
                         </td>
                         <td class="px-4 py-3">
-                            <a href="#" class="text-blue-500 hover:text-blue-700">Editar</a>
+                            <a href="{{ route('driver.edit', $driver) }}" class="text-blue-500 hover:text-blue-700">Editar</a>
                         </td>
                     </tr>
                 @endforeach

@@ -9,12 +9,12 @@ class Index extends Component
 {
     public function render()
     {
-        $drivers = Driver::paginate();
+        $drivers = Driver::orderBy('name', 'ASC')->paginate();
 
         $successMessage = session('success');
 
         return view('livewire.drivers.index', [
-            'drivers' => Driver::paginate(),
+            'drivers' => $drivers,
             'successMessage' => $successMessage,
         ]);
     }
