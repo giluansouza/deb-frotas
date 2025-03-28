@@ -11,6 +11,9 @@ class Index extends Component
     {
         $vehicles = Vehicle::paginate();
 
-        return view('livewire.vehicles.index', compact('vehicles'));
+        return view('livewire.vehicles.index', [
+            'vehicles' => $vehicles,
+            'successMessage' => session('success'),
+        ]);
     }
 }
