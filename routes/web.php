@@ -7,6 +7,9 @@ use App\Livewire\Users\UsersListing;
 use App\Livewire\Vehicles\Index as VehiclesIndex;
 use App\Livewire\Vehicles\Create as VehiclesCreate;
 use App\Livewire\Vehicles\Edit as VehiclesEdit;
+use App\Livewire\VehicleKilometers\Index as VkmIndex;
+use App\Livewire\VehicleKilometers\Create as VkmCreate;
+use App\Livewire\VehicleKilometers\Edit as VkmEdit;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -24,6 +27,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', VehiclesIndex::class)->name('index');
         Route::get('/create', VehiclesCreate::class)->name('create');
         Route::get('/{vehicle}/edit', VehiclesEdit::class)->name('edit');
+    });
+
+    Route::prefix('vehicles-km')->name('vkm.')->group(function () {
+        Route::get('/', VkmIndex::class)->name('index');
+        Route::get('/create', VkmCreate::class)->name('create');
+        Route::get('/{vehicle}/edit', VkmEdit::class)->name('edit');
     });
 
     // DRIVERS

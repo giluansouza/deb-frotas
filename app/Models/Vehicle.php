@@ -24,4 +24,9 @@ class Vehicle extends Model
         'conservation_state',
         'visual_identity',
     ];
+
+    public function monthlyKilometers()
+    {
+        return $this->hasMany(VehicleMonthlyKilometer::class);
+    }
 }
