@@ -10,6 +10,9 @@ use App\Livewire\Vehicles\Edit as VehiclesEdit;
 use App\Livewire\VehicleKilometers\Index as VkmIndex;
 use App\Livewire\VehicleKilometers\Create as VkmCreate;
 use App\Livewire\VehicleKilometers\Edit as VkmEdit;
+use App\Livewire\Fueling\Index as FuelingIndex;
+use App\Livewire\Fueling\Create as FuelingCreate;
+use App\Livewire\Fueling\Edit as FuelingEdit;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -40,6 +43,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', Index::class)->name('index');
         Route::get('/create', Create::class)->name('create');
         Route::get('/{driver}/edit', Edit::class)->name('edit');
+    });
+
+    // FUELING
+    Route::prefix('fuelings')->name('fueling.')->group(function () {
+        Route::get('/', FuelingIndex::class)->name('index');
+        Route::get('/create', FuelingCreate::class)->name('create');
+        Route::get('/{fueling}/edit', FuelingEdit::class)->name('edit');
     });
 
     // USERS

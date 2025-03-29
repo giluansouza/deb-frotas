@@ -29,6 +29,15 @@
                         >
                             {{ __('Controle Km') }}
                         </flux:navlist.item>
+
+                        <flux:navlist.item
+                            icon="wrench-screwdriver"
+                            :href="route('fueling.index')"
+                            :current="request()->routeIs('fueling.*')"
+                            wire:navigate
+                        >
+                            {{ __('Abastecimentos') }}
+                        </flux:navlist.item>
                     @endhasanyrole
 
                     @hasanyrole('admin')

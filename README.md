@@ -39,18 +39,6 @@ Este projeto segue como referência a **Cartilha da Gestão da Frota Pública**,
 
 ---
 
-## ✅ Status Atual do Projeto
-
-- [x] Controle de usuários e permissões
-- [x] Cadastro de motoristas e veículos
-- [x] Estrutura para controle de KM mensal
-- [ ] Estrutura para controle de abastecimento
-- [ ] Módulo de solicitação e autorização de uso de veículos
-- [ ] Controle de quilometragem mensal
-- [ ] Relatórios gerenciais
-
----
-
 ## ⚙️ Contribuindo
 
 Contribuições são bem-vindas. Para rodar o projeto localmente:
