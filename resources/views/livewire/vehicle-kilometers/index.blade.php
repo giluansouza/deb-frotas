@@ -5,6 +5,12 @@
             <h2 class="text-3xl font-semibold text-gray-800">Controle Mensal de KM</h2>
         </div>
 
+        @if ($successMessage)
+            <div class="mb-4 p-4 rounded bg-green-100 text-green-700 border border-green-300 shadow-sm">
+                {{ $successMessage }}
+            </div>
+        @endif
+
         <div class="flex items-center gap-4 mb-6">
             <form wire:submit.prevent="applyFilters" class="flex items-end gap-4 mb-6">
 
@@ -16,7 +22,7 @@
                         @endforeach
                     </select>
                 </div>
-            
+
                 <div>
                     <label>Ano:</label>
                     <select wire:model.defer="year" class="border rounded p-1">
@@ -25,7 +31,7 @@
                         @endforeach
                     </select>
                 </div>
-            
+
                 <div>
                     <label>Status:</label>
                     <select wire:model.defer="status" class="border rounded p-1">
@@ -35,19 +41,19 @@
                         <option value="missing">Sem Dados</option>
                     </select>
                 </div>
-            
+
                 <div>
                     <button type="submit" class="px-4 py-1.5 rounded bg-blue-600 text-white hover:bg-blue-700">
                         Filtrar
                     </button>
                 </div>
-            
+
                 <div>
                     <button type="button" wire:click="clearFilters" class="px-4 py-1.5 rounded bg-gray-300 hover:bg-gray-400">
                         Limpar
                     </button>
                 </div>
-            </form>                      
+            </form>
         </div>
 
         <table class="w-full table-auto border-collapse">
@@ -75,20 +81,20 @@
                                         ✅ Fechado
                                     </span>
                                     @break
-                        
+
                                 @case('partial')
                                     <span class="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">
                                         ⚠️ Aberto
                                     </span>
                                     @break
-                        
+
                                 @default
                                     <span class="inline-flex items-center rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-800">
                                         ➕ Sem Dados
                                     </span>
                             @endswitch
                         </td>
-                        
+
                         <td class="p-2">
                             @if($item['record'])
                                 <button wire:click="openEditModal({{ $item['record']->id }})"
@@ -135,18 +141,18 @@
 
                     <div>
                         <label class="block text-sm mb-1">Km Inicial</label>
-                        <input 
-                            type="number" 
-                            wire:model.defer="initial_km" 
+                        <input
+                            type="number"
+                            wire:model.defer="initial_km"
                             class="input" />
                         @error('initial_km') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
                     </div>
 
                     <div>
                         <label class="block text-sm mb-1">Km Final</label>
-                        <input 
-                            type="number" 
-                            wire:model.defer="final_km" 
+                        <input
+                            type="number"
+                            wire:model.defer="final_km"
                             class="input"
                         />
                         @error('final_km') <span class="text-sm text-red-500">{{ $message }}</span> @enderror

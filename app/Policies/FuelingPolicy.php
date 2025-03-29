@@ -26,7 +26,7 @@ class FuelingPolicy
         }
 
         if ($user->hasRole(['driver'])) {
-            return $fueling->driver_id === $user->driver->id;
+            return $fueling->driver_id === $user->driver?->id;
         }
 
         return false;

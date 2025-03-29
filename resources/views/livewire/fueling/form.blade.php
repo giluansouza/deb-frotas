@@ -5,7 +5,9 @@
         <select wire:model.defer="vehicle_id" class="input">
             <option value="">Selecione</option>
             @foreach ($vehicles as $vehicle)
-                <option value="{{ $vehicle->id }}">{{ $vehicle->plate }}</option>
+                <option value="{{ $vehicle->id }}">
+                    {{ $vehicle->plate. ' - ' . $vehicle->model }}
+                </option>
             @endforeach
         </select>
         @error('vehicle_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
@@ -54,7 +56,13 @@
 
     <div>
         <label class="block font-medium">Tipo de Combustível *</label>
-        <input type="text" wire:model.defer="fuel_type" class="input">
+        <select wire:model.defer="fuel_type" class="input">
+            <option value="">Selecione o tipo de combustível</option>
+            <option value="Gasolina">Gasolina</option>
+            <option value="Etanol">Etanol</option>
+            <option value="Diesel S-10">Diesel S-10</option>
+            <option value="Diesel S-500">Diesel S-500</option>
+        </select>
         @error('fuel_type') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
     </div>
 

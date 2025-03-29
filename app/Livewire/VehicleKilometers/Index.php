@@ -52,6 +52,7 @@ class Index extends Component
     {
         return view('livewire.vehicle-kilometers.index', [
             'records' => $this->getRecords(),
+            'successMessage' => session('successMessage'),
         ]);
     }
 

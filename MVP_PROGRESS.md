@@ -16,6 +16,7 @@
 
 - [x] Não permitir exclusão de veículos/motoristas vinculados a abastecimento
 - [x] Registro de quem autorizou o abastecimento (authorized_by)
+- [ ] Validar KM no abastecimento para evitar que seja menor que o último abastecimento
 
 ## 🚧 Em andamento
 

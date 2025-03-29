@@ -36,4 +36,9 @@ class Driver extends Model
 
         return $this->validity_cnh->isFuture() && $this->validity_cnh->isBefore(Carbon::now()->addMonths(3));
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

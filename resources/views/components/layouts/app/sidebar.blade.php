@@ -29,7 +29,8 @@
                         >
                             {{ __('Controle Km') }}
                         </flux:navlist.item>
-
+                    @endhasanyrole
+                    @hasanyrole('admin|fleet_manager|driver')
                         <flux:navlist.item
                             icon="wrench-screwdriver"
                             :href="route('fueling.index')"
