@@ -1,9 +1,11 @@
 <div class="max-w-7xl mx-auto p-6 bg-zinc-100 rounded-xl shadow-md">
     <div class="flex justify-between border-b border-gray-200 pb-3 mb-5">
         <h2 class="text-3xl font-semibold text-gray-800">Motoristas</h2>
-        <a href="{{ route("driver.create")}}" class="bg-blue-500 cursor-pointer hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-            Novo motorista
-        </a>
+        @hasanyrole('admin|fleet_manager')
+            <a href="{{ route("driver.create")}}" class="bg-blue-500 cursor-pointer hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                Novo motorista
+            </a>
+        @endhasanyrole
     </div>
 
     @if ($successMessage)

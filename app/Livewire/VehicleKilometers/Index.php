@@ -86,6 +86,10 @@ class Index extends Component
 
     public function openCreateModal($vehicleId)
     {
+        if (!auth()->user()->hasRole('fleet_manager')) {
+            abort(403, 'Você não tem permissão para executar esta ação.');
+        }
+
         $this->resetModal();
         $this->vehicleId = $vehicleId;
         $this->editMode = false;
@@ -94,6 +98,10 @@ class Index extends Component
 
     public function openEditModal($recordId)
     {
+        if (!auth()->user()->hasRole('fleet_manager')) {
+            abort(403, 'Você não tem permissão para executar esta ação.');
+        }
+
         $this->resetModal();
         $record = VehicleMonthlyKilometer::findOrFail($recordId);
         $this->recordId = $record->id;
@@ -108,6 +116,10 @@ class Index extends Component
 
     public function save()
     {
+        if (!auth()->user()->hasRole('fleet_manager')) {
+            abort(403, 'Você não tem permissão para executar esta ação.');
+        }
+
         $this->validate([
             'initial_km' => 'required|integer|min:0',
             'final_km' => 'nullable|integer|gte:initial_km',

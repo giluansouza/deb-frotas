@@ -7,6 +7,13 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    public function mount()
+    {
+        if (!auth()->user()->hasAnyRole(['admin', 'fleet_manager'])) {
+            abort(403, 'Você não tem permissão para acessar esta página.');
+        }
+    }
+
     public function render()
     {
         $drivers = Driver::orderBy('name', 'ASC')->paginate();

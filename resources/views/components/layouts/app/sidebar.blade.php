@@ -14,10 +14,13 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="truck" :href="route('vehicle.index')" :current="request()->routeIs('vehicle')" wire:navigate>{{ __('Veículos') }}</flux:navlist.item>
-                    <flux:navlist.item icon="user-group" :href="route('driver.index')" :current="request()->routeIs('driver')" wire:navigate>{{ __('Motoristas') }}</flux:navlist.item>
 
-                    {{-- @can('view_km_control') --}}
+                    @hasanyrole('admin|fleet_manager')
+                        <flux:navlist.item icon="truck" :href="route('vehicle.index')" :current="request()->routeIs('vehicle')" wire:navigate>{{ __('Veículos') }}</flux:navlist.item>
+                        <flux:navlist.item icon="user-group" :href="route('driver.index')" :current="request()->routeIs('driver')" wire:navigate>{{ __('Motoristas') }}</flux:navlist.item>
+                    @endhasanyrole
+
+                    @hasanyrole('admin|fleet_manager')
                         <flux:navlist.item
                             icon="clipboard-document-check"
                             :href="route('vkm.index')"
@@ -26,9 +29,11 @@
                         >
                             {{ __('Controle Km') }}
                         </flux:navlist.item>
-                    {{-- @endcan --}}
+                    @endhasanyrole
 
-                    <flux:navlist.item icon="users" :href="route('user')" :current="request()->routeIs('users')" wire:navigate>{{ __('Usuários') }}</flux:navlist.item>
+                    @hasanyrole('admin')
+                        <flux:navlist.item icon="users" :href="route('user')" :current="request()->routeIs('users')" wire:navigate>{{ __('Usuários') }}</flux:navlist.item>
+                    @endhasanyrole
                 </flux:navlist.group>
             </flux:navlist>
 
