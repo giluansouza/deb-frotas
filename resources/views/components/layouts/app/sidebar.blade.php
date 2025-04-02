@@ -30,6 +30,7 @@
                             {{ __('Controle Km') }}
                         </flux:navlist.item>
                     @endhasanyrole
+
                     @hasanyrole('admin|fleet_manager|driver')
                         <flux:navlist.item
                             icon="wrench-screwdriver"
@@ -42,8 +43,21 @@
                     @endhasanyrole
 
                     @hasanyrole('admin')
-                        <flux:navlist.item icon="users" :href="route('user')" :current="request()->routeIs('users')" wire:navigate>{{ __('Usuários') }}</flux:navlist.item>
+                        <flux:navlist.group heading="{{ __('Configurações') }}">
+                            <flux:navlist.item icon="users" :href="route('user.index')" :current="request()->routeIs('users')" wire:navigate>
+                                {{ __('Usuários') }}
+                            </flux:navlist.item>
+
+                            <flux:navlist.item icon="fuel" :href="route('fuelstation.index')" :current="request()->routeIs('fuelstation.*')" wire:navigate>
+                                {{ __('Postos de Combustível') }}
+                            </flux:navlist.item>
+
+                            <flux:navlist.item icon="wrench" :href="route('repairshop.index')" :current="request()->routeIs('repairshop.*')" wire:navigate>
+                                {{ __('Oficinas') }}
+                            </flux:navlist.item>
+                        </flux:navlist.group>
                     @endhasanyrole
+
                 </flux:navlist.group>
             </flux:navlist>
 

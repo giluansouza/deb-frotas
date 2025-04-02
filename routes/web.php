@@ -13,6 +13,13 @@ use App\Livewire\VehicleKilometers\Edit as VkmEdit;
 use App\Livewire\Fueling\Index as FuelingIndex;
 use App\Livewire\Fueling\Create as FuelingCreate;
 use App\Livewire\Fueling\Edit as FuelingEdit;
+use App\Livewire\Settings\FuelStation\Index as FuelStationIndex;
+use App\Livewire\Settings\FuelStation\Create as FuelStationCreate;
+use App\Livewire\Settings\FuelStation\Edit as FuelStationEdit;
+use App\Livewire\Settings\RepairShop\Index as RepairShopIndex;
+use App\Livewire\Settings\RepairShop\Create as RepairShopCreate;
+use App\Livewire\Settings\RepairShop\Edit as RepairShopEdit;
+use App\Livewire\Settings\Users\Index as UserIndex;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -51,9 +58,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/create', FuelingCreate::class)->name('create');
         Route::get('/{fueling}/edit', FuelingEdit::class)->name('edit');
     });
+});
 
-    // USERS
-    Route::get('users', UsersListing::class)->name('user');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::prefix('settings')->group(function () {
+        Route::get('/users', UserIndex::class)->name('user.index');
+        Route::get('/users/create', UserIndex::class)->name('user.create');
+        Route::get('/users/{user}/edit', UserIndex::class)->name('user.edit');
+
+        Route::get('/fuelstations', FuelStationIndex::class)->name('fuelstation.index');
+        Route::get('/fuelstations/create', FuelStationCreate::class)
+            ->name('fuelstation.create');
+        Route::get('/fuelstations/{fuelstation}/edit', FuelStationEdit::class)
+            ->name('fuelstation.edit');
+
+        Route::get('/repairshops', RepairShopIndex::class)->name('repairshop.index');
+        Route::get('/repairshops/create', RepairShopCreate::class)->name('repairshop.create');
+        Route::get('/repairshops/{repairshop}/edit', RepairShopEdit::class)->name('repairshop.edit');
+    });
 });
 
 Route::middleware(['auth'])->group(function () {

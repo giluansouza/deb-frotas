@@ -20,12 +20,12 @@
 
 ## 🚧 Em andamento
 
-- [ ] Abastecimentos (Fuelings) - com autorização por gestor
-- [ ] Cálculo automático do custo total (litros * valor por litro)
-- [ ] Validação: hodômetro > último abastecimento
-- [ ] Listagem e filtros na tela de abastecimentos (`Fueling/Index`)
-- [ ] Tela de edição (`Fueling/Edit`)
-- [ ] Política de autorização por tipo de usuário (gate/policy)
+- [x] Abastecimentos (Fuelings) - com autorização por gestor
+- [x] Cálculo automático do custo total (litros * valor por litro)
+- [x] Validação: hodômetro > último abastecimento
+- [x] Listagem e filtros na tela de abastecimentos (`Fueling/Index`)
+- [x] Tela de edição (`Fueling/Edit`)
+- [x] Política de autorização por tipo de usuário (gate/policy)
 - [ ] Tela de resumo mensal por veículo (km inicial/final)
 
 ## 📌 Próximas etapas
