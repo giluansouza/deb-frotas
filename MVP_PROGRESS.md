@@ -36,3 +36,23 @@
 - [ ] Controle por contrato de abastecimento (cartão)
 - [ ] Notificações por vencimento de CNH
 - [ ] Auditoria e histórico de alterações
+
+### Sprint 5 – [Concluída em 2025-04-01]
+
+✅ Implementado o módulo de Configurações para:
+
+- Cadastro de Postos de Combustíveis (FuelStation)
+  - Index, Create e Edit com validação
+  - Utiliza componente Livewire + layout tradicional
+  - Protegido por middleware `role:admin`
+  - Seed e Factory criados
+
+- Cadastro de Oficinas de Reparos (RepairShop)
+  - Index, Create e Edit completos
+  - Uso de Enum `RepairSpecialty` para especialidades
+  - Select com validação e cast automático
+  - Seed e Factory criados
+
+🔄 O módulo de **usuários (User)** teve apenas a estrutura visual iniciada, com botões e placeholders de ações.
+
+📌 Módulo de manutenção será iniciado na Sprint 6.
