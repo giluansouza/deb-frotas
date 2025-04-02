@@ -16,6 +16,10 @@ use App\Livewire\Fueling\Edit as FuelingEdit;
 use App\Livewire\Settings\FuelStation\Index as FuelStationIndex;
 use App\Livewire\Settings\FuelStation\Create as FuelStationCreate;
 use App\Livewire\Settings\FuelStation\Edit as FuelStationEdit;
+use App\Livewire\Maintenance\Index as MaintenanceIndex;
+use App\Livewire\Maintenance\Create as MaintenanceCreate;
+use App\Livewire\Maintenance\Edit as MaintenanceEdit;
+use App\Livewire\Maintenance\MaintenanceForm;
 use App\Livewire\Settings\RepairShop\Index as RepairShopIndex;
 use App\Livewire\Settings\RepairShop\Create as RepairShopCreate;
 use App\Livewire\Settings\RepairShop\Edit as RepairShopEdit;
@@ -57,6 +61,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', FuelingIndex::class)->name('index');
         Route::get('/create', FuelingCreate::class)->name('create');
         Route::get('/{fueling}/edit', FuelingEdit::class)->name('edit');
+    });
+
+    Route::prefix('maintenances')->name('maintenance.')->group(function () {
+        Route::get('/', MaintenanceIndex::class)->name('index');
+        Route::get('/create', MaintenanceForm::class)->name('create');
+        Route::get('/{maintenance}/edit', MaintenanceForm::class)->name('edit');
     });
 });
 

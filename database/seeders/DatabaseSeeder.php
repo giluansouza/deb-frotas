@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             FuelStationAndRepairShopSeeder::class,
             DriverVehicleSeeder::class,
             FuelingSeeder::class,
+            MaintenanceSeeder::class,
         ]);
     }
 }
