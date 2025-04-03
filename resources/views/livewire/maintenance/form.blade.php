@@ -1,128 +1,104 @@
-<div>
-    <h1 class="text-xl font-bold mb-4">
-        {{ $isEdit ? 'Editar Manutenção #'.$maintenance->id : 'Criar Nova Manutenção' }}
-    </h1>
+<div class="space-y-4">
 
-    @if (session('message'))
-        <div class="bg-green-200 p-2 mb-2">
-            {{ session('message') }}
-        </div>
-    @endif
+    <div>
+        <label class="block font-medium">Autorizado por *</label>
+        <input type="text" disabled value="{{ auth()->user()->name }}" class="input">
+    </div>
 
-    <form wire:submit.prevent="save">
-        {{-- 1) Campos SEMPRE exibidos --}}
+    <div class="mb-4">
+        <label class="block font-medium">Status</label>
 
-        <div class="mb-2">
-            <label>Veículo</label>
-            <select wire:model="maintenance.vehicle_id" class="border">
-                <option value="">-- selecione --</option>
-                @foreach($vehicles as $v)
-                    <option value="{{ $v->id }}">{{ $v->plate }} - {{ $v->model }}</option>
+        @if($isEdit)
+            <select wire:model.defer="status" class="input">
+                @foreach($statuses as $value => $label)
+                    <option value="{{ $value }}">{{ $label }}</option>
                 @endforeach
             </select>
-            @error('maintenance.vehicle_id') <span class="text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="mb-2">
-            <label>Oficina</label>
-            <select wire:model="maintenance.repair_shop_id" class="border">
-                <option value="">-- selecione --</option>
-                @foreach($repairShops as $shop)
-                    <option value="{{ $shop->id }}">{{ $shop->name }}</option>
-                @endforeach
-            </select>
-            @error('maintenance.repair_shop_id') <span class="text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="mb-2">
-            <label>Autorizado por (Usuário)</label>
-            <select wire:model="maintenance.authorized_by" class="border">
-                <option value="">-- selecione --</option>
-                @foreach($users as $u)
-                    <option value="{{ $u->id }}">{{ $u->name }}</option>
-                @endforeach
-            </select>
-            @error('maintenance.authorized_by') <span class="text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="mb-2">
-            <label>Tipo</label>
-            <select wire:model="maintenance.type" class="border">
-                <option value="preventive">Preventiva</option>
-                <option value="corrective">Corretiva</option>
-            </select>
-            @error('maintenance.type') <span class="text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="mb-2">
-            <label>Data de Início</label>
-            <input type="date" wire:model="maintenance.start_date" class="border">
-            @error('maintenance.start_date') <span class="text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="mb-2">
-            <label>Hodômetro</label>
-            <input type="number" wire:model="maintenance.odometer" class="border">
-            @error('maintenance.odometer') <span class="text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="mb-2">
-            <label>Descrição do Problema</label>
-            <textarea wire:model="maintenance.problem_description" class="border w-full"></textarea>
-            @error('maintenance.problem_description') <span class="text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="mb-2">
-            <label>Custo</label>
-            <input type="number" step="0.01" wire:model="maintenance.cost" class="border">
-            @error('maintenance.cost') <span class="text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="mb-2">
-            <label>Status</label>
-            <select wire:model="maintenance.status" class="border" wire:change="updatedMaintenanceStatus($event.target.value)">
-                <option value="pending">Pendente</option>
-                <option value="in_progress">Em andamento</option>
-                <option value="completed">Concluído</option>
-            </select>
-            @error('maintenance.status') <span class="text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        {{-- 2) Campos que só aparecem se status != 'pending' --}}
-        @if($maintenance->status !== 'pending')
-            <div class="mb-2">
-                <label>Descrição da Solução</label>
-                <textarea wire:model="maintenance.solution_description" class="border w-full"></textarea>
-                @error('maintenance.solution_description') <span class="text-red-600">{{ $message }}</span> @enderror
-            </div>
+            @error('status') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        @else
+            <input type="text" value="Pendente" class="input" disabled>
         @endif
+    </div>
 
-        {{-- 3) Campos que só aparecem se status = 'completed' --}}
-        @if($maintenance->status === 'completed')
-            <div class="mb-2">
-                <label>Data de Término</label>
-                <input type="date" wire:model="maintenance.end_date" class="border">
-                @error('maintenance.end_date') <span class="text-red-600">{{ $message }}</span> @enderror
-            </div>
+    <div class="mb-4">
+        <label class="block font-medium">Tipo de Manutenção *</label>
+        <select wire:model.defer="type" class="input" @disabled($isEdit)>
+            <option value="">Selecione...</option>
+            @foreach($types as $value => $label)
+                <option value="{{ $value }}">{{ $label }}</option>
+            @endforeach
+        </select>
+        @error('type') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    </div>
 
-            <div class="mb-2">
-                <label>Número da NF</label>
-                <input type="text" wire:model="maintenance.invoice_number" class="border">
-                @error('maintenance.invoice_number') <span class="text-red-600">{{ $message }}</span> @enderror
-            </div>
+    <div class="mb-4">
+        <label class="block font-medium">Veículo *</label>
+        <select wire:model.defer="vehicle_id" class="input" @disabled($isEdit)>
+            <option value="">Selecione...</option>
+            @foreach($vehicles as $item)
+                <option value="{{ $item['id'] }}">{{ $item['plate'].' - '.$item['model'] }}</option>
+            @endforeach
+        </select>
+        @error('vehicle_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    </div>
 
-            <div class="mb-2">
-                <label>Data da NF</label>
-                <input type="date" wire:model="maintenance.invoice_date" class="border">
-                @error('maintenance.invoice_date') <span class="text-red-600">{{ $message }}</span> @enderror
-            </div>
-        @endif
+    <div class="mb-4">
+        <label class="block font-medium">Oficina *</label>
+        <select wire:model.defer="repair_shop_id" class="input" @disabled($isEdit)>
+            <option value="">Selecione...</option>
+            @foreach($repairshops as $item)
+                <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+            @endforeach
+        </select>
+        @error('repair_shop_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    </div>
 
-        <div class="mt-4">
-            <button type="submit" class="px-4 py-2 bg-blue-500 text-white">
-                {{ $isEdit ? 'Atualizar' : 'Salvar' }}
-            </button>
-            <a href="{{ route('maintenance.index') }}" class="px-4 py-2 bg-gray-300">Cancelar</a>
-        </div>
-    </form>
+    <div class="mb-4">
+        <label class="block font-medium">Data da Manutenção *</label>
+        <input type="date" wire:model.defer="start_date" class="input">
+        @error('start_date') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    </div>
+
+    <div class="mb-4">
+        <label class="block font-medium">Hodômetro *</label>
+        <input type="number" wire:model.defer="odometer" class="input" @disabled($isEdit)>
+        @error('odometer') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    </div>
+
+    <div class="mb-4">
+        <label class="block font-medium">Descrição do Problema *</label>
+        <textarea wire:model.defer="problem_description" class="input"></textarea>
+        @error('problem_description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    </div>
+
+    <div class="mb-4">
+        <label class="block font-medium">Custo Estimado *</label>
+        <input type="number" wire:model.defer="cost" class="input">
+        @error('cost') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    </div>
+
+    <div class="mb-4">
+        <label class="block font-medium">Descrição da Solução</label>
+        <textarea wire:model.defer="solution_description" class="input"  @disabled(!$isEdit)></textarea>
+        @error('solution_description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    </div>
+
+    <div class="mb-4">
+        <label class="block font-medium">Data de Conclusão</label>
+        <input type="date" wire:model.defer="end_date" class="input" @disabled(!$isEdit)>
+        @error('end_date') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    </div>
+
+    <div class="mb-4">
+        <label class="block font-medium">Número da Nota Fiscal</label>
+        <input type="text" wire:model.defer="invoice_number" class="input" placeholder="Número da nota fiscal" @disabled(!$isEdit)>
+        @error('invoice_number') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    </div>
+
+    <div class="mb-4">
+        <label class="block font-medium">Data da Nota Fiscal</label>
+        <input type="date" wire:model.defer="invoice_date" class="input" @disabled(!$isEdit)>
+        @error('invoice_date') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    </div>
+
 </div>

@@ -29,4 +29,14 @@ class Vehicle extends Model
     {
         return $this->hasMany(VehicleMonthlyKilometer::class);
     }
+
+    public function fuelings()
+    {
+        return $this->hasMany(Fueling::class);
+    }
+
+    public function maintenance()
+    {
+        return $this->hasMany(Maintenance::class);
+    }
 }

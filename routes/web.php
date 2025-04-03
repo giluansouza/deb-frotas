@@ -65,8 +65,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('maintenances')->name('maintenance.')->group(function () {
         Route::get('/', MaintenanceIndex::class)->name('index');
-        Route::get('/create', MaintenanceForm::class)->name('create');
-        Route::get('/{maintenance}/edit', MaintenanceForm::class)->name('edit');
+        Route::get('/create', MaintenanceCreate::class)->name('create');
+        Route::get('/{maintenance}/edit', MaintenanceEdit::class)->name('edit');
     });
 });
 

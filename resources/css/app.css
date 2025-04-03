@@ -68,6 +68,6 @@ select:focus[data-flux-control] {
 
 @layer components {
     .input {
-        @apply mt-1 block p-2 w-full rounded-md bg-zinc-50 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200;
+        @apply mt-1 block p-2 w-full rounded-md bg-zinc-50 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 disabled:bg-zinc-200;
     }
 }

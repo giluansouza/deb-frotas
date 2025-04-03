@@ -37,7 +37,7 @@ class MaintenancePolicy
      */
     public function update(User $user, Maintenance $maintenance): bool
     {
-        if ($maintenance->status === 'completed') {
+        if ($maintenance->status->isCompleted() || $maintenance->status->isCancelled()) {
             return false;
         }
 
@@ -49,11 +49,11 @@ class MaintenancePolicy
      */
     public function delete(User $user, Maintenance $maintenance): bool
     {
-        if (in_array($maintenance->status, ['in_progress', 'completed'])) {
-            return false;
+        if ($maintenance->status->isCancelled()) {
+            return $user->hasRole('admin');
         }
 
-        return $user->hasRole('admin');
+        return $maintenance->status->isPending() && $user->can('maintenance:delete');
     }
 
     /**
