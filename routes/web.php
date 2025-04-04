@@ -28,6 +28,10 @@ use App\Livewire\VehicleUsage\Dispatch;
 use App\Livewire\VehicleUsage\RequestForm;
 use App\Livewire\VehicleUsage\ReturnForm;
 use App\Livewire\VehicleUsage\Index as VehicleUsageIndex;
+use App\Livewire\Reports\Index as ReportsIndex;
+use App\Livewire\Reports\FuelReport;
+use App\Livewire\Reports\MaintenanceReport;
+use App\Livewire\Reports\VehiclesReport;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -81,6 +85,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/dispatch', Dispatch::class)->name('dispatch');
         Route::get('/return', ReturnForm::class)->name('return');
         Route::get('/', VehicleUsageIndex::class)->name('index');
+    });
+
+    // REPORTS
+    Route::prefix('reports')->name('reports.')->middleware('can:viewReports')->group(function () {
+        Route::get('/', ReportsIndex::class)->name('index');
+        Route::get('/fuel', FuelReport::class)->name('fuel');
+        Route::get('/vehicles', VehiclesReport::class)->name('vehicles');
+        Route::get('/maintenance', MaintenanceReport::class)->name('maintenance');
     });
 });
 

@@ -62,6 +62,11 @@
                 @endhasanyrole
 
                 @hasanyrole('admin|fleet_manager')
+                    <flux:navlist.item icon="document-chart-bar" :href="route('reports.index')"
+                        :current="request()->routeIs('reports.*')" wire:navigate>
+                        {{ __('Relatórios') }}
+                    </flux:navlist.item>
+
                     <flux:navlist.item icon="clipboard-document-check" :href="route('vkm.index')"
                         :current="request()->routeIs('vkm.*')" wire:navigate>
                         {{ __('Controle Km') }}
