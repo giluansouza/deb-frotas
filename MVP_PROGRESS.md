@@ -11,12 +11,15 @@
 - [x] Policy de abastecimentos
 - [x] Testes automatizados da policy
 - [x] Factory completa de Fueling
+- [x] Manutenção de veículos (Maintenance)
+- [x] Utilização de veículos (VehicleUsage)
 
 ### Regras de negócios
 
 - [x] Não permitir exclusão de veículos/motoristas vinculados a abastecimento
 - [x] Registro de quem autorizou o abastecimento (authorized_by)
 - [ ] Validar KM no abastecimento para evitar que seja menor que o último abastecimento
+- [ ] Admin poderá configurar quais tipos de gestores poderão autorizar liberação de veículo
 
 ## 🚧 Em andamento
 
@@ -37,22 +40,50 @@
 - [ ] Notificações por vencimento de CNH
 - [ ] Auditoria e histórico de alterações
 
-### Sprint 5 – [Concluída em 2025-04-01]
+## Sprint 1 - Autenticação e Controle de Acesso
 
-✅ Implementado o módulo de Configurações para:
+- [x] Login/logout
+- [x] Middleware de roles e permissões
 
-- Cadastro de Postos de Combustíveis (FuelStation)
-  - Index, Create e Edit com validação
-  - Utiliza componente Livewire + layout tradicional
-  - Protegido por middleware `role:admin`
-  - Seed e Factory criados
+## Sprint 2 - Cadastro de Veículos e Motoristas
 
-- Cadastro de Oficinas de Reparos (RepairShop)
-  - Index, Create e Edit completos
-  - Uso de Enum `RepairSpecialty` para especialidades
-  - Select com validação e cast automático
-  - Seed e Factory criados
+- [x] CRUD de Vehicles
+- [x] CRUD de Drivers
 
-🔄 O módulo de **usuários (User)** teve apenas a estrutura visual iniciada, com botões e placeholders de ações.
+## Sprint 3 - Combustível
 
-📌 Módulo de manutenção será iniciado na Sprint 6.
+- [x] CRUD de FuelStation
+
+## Sprint 4 - Oficinas
+
+- [x] CRUD de RepairShop
+
+## Sprint 5 - Controle de Km Mensal
+
+- [x] Tela de registro de km inicial/final por mês
+
+## Sprint 6 - Manutenções
+
+- [x] CRUD completo de Maintenance
+- [x] Permissões por status
+- [x] Relacionamento com RepairShop
+- [x] Exclusão com confirmação
+
+## Sprint 7 - Utilização de Veículos
+
+- [x] Solicitação de uso (RequestForm)
+- [x] Autorização da solicitação (AuthorizeTable)
+- [x] Liberação de veículo (Dispatch)
+- [x] Registro do retorno (ReturnForm)
+- [x] Controle de KM inicial e final
+- [x] Registro de observações e ocorrências
+- [x] Confirmação obrigatória de vistoria
+- [x] Políticas por papel: driver vs garage_manager
+
+## Sprint 8 - A definir
+
+- [ ] ...
+
+---
+
+Atualizado automaticamente via Livewire + ChatGPT Sprint Manager.

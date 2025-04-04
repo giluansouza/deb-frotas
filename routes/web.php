@@ -19,11 +19,15 @@ use App\Livewire\Settings\FuelStation\Edit as FuelStationEdit;
 use App\Livewire\Maintenance\Index as MaintenanceIndex;
 use App\Livewire\Maintenance\Create as MaintenanceCreate;
 use App\Livewire\Maintenance\Edit as MaintenanceEdit;
-use App\Livewire\Maintenance\MaintenanceForm;
 use App\Livewire\Settings\RepairShop\Index as RepairShopIndex;
 use App\Livewire\Settings\RepairShop\Create as RepairShopCreate;
 use App\Livewire\Settings\RepairShop\Edit as RepairShopEdit;
 use App\Livewire\Settings\Users\Index as UserIndex;
+use App\Livewire\VehicleUsage\AuthorizeTable;
+use App\Livewire\VehicleUsage\Dispatch;
+use App\Livewire\VehicleUsage\RequestForm;
+use App\Livewire\VehicleUsage\ReturnForm;
+use App\Livewire\VehicleUsage\Index as VehicleUsageIndex;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -63,10 +67,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{fueling}/edit', FuelingEdit::class)->name('edit');
     });
 
+    // MAINTENANCE
     Route::prefix('maintenances')->name('maintenance.')->group(function () {
         Route::get('/', MaintenanceIndex::class)->name('index');
         Route::get('/create', MaintenanceCreate::class)->name('create');
         Route::get('/{maintenance}/edit', MaintenanceEdit::class)->name('edit');
+    });
+
+    // VEHICLES USAGE
+    Route::prefix('vehicle-usage')->name('vehicle-usage.')->group(function () {
+        Route::get('/request', RequestForm::class)->name('request');
+        Route::get('/authorize', AuthorizeTable::class)->name('authorize');
+        Route::get('/dispatch', Dispatch::class)->name('dispatch');
+        Route::get('/return', ReturnForm::class)->name('return');
+        Route::get('/', VehicleUsageIndex::class)->name('index');
     });
 });
 
