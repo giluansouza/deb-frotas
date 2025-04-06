@@ -1,29 +1,17 @@
 <?php
 
-namespace App\Livewire\Reports;
+namespace App\Exports;
 
-use App\Exports\FuelReportExport;
 use App\Models\Vehicle;
 use Carbon\Carbon;
-use Livewire\Attributes\Title;
-use Livewire\Component;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
-#[Title('Relatório de Abastecimentos')]
-class FuelReport extends Component
+class FuelReportExport implements FromView
 {
-    public $month;
-    public $year;
+    public function __construct(protected int $month, protected int $year) {}
 
-    public $vehicleReports = [];
-
-    public function mount()
-    {
-        $this->month = Carbon::now()->month;
-        $this->year = Carbon::now()->year;
-    }
-
-    public function render()
+    public function view(): View
     {
         $startDate = Carbon::create($this->year, $this->month)->startOfMonth();
         $endDate = Carbon::create($this->year, $this->month)->endOfMonth();
@@ -38,7 +26,7 @@ class FuelReport extends Component
         ])->get();
 
         // Prepara os relatórios por veículo
-        $this->vehicleReports = $vehicles->map(function ($vehicle) {
+        $vehicleReports = $vehicles->map(function ($vehicle) {
             $monthlyKm = $vehicle->monthlyKilometers->first();
 
             $initialKm = $monthlyKm?->initial_km ?? null;
@@ -67,31 +55,10 @@ class FuelReport extends Component
             ];
         });
 
-        return view('livewire.reports.fuel-report');
-    }
-
-    public function filter()
-    {
-        $this->resetPage();
-    }
-
-    public function clearFilters()
-    {
-        $this->month = Carbon::now()->month;
-        $this->year = Carbon::now()->year;
-        $this->resetPage();
-    }
-
-    public function exportPdf()
-    {
-        // TODO
-    }
-
-    public function exportToExcel()
-    {
-        return Excel::download(
-            new FuelReportExport($this->month, $this->year),
-            'relatorio-de-combustivel.xlsx'
-        );
+        return view('exports.fuel-report', [
+            'vehicleReports' => $vehicleReports,
+            'month' => $this->month,
+            'year' => $this->year,
+        ]);
     }
 }
