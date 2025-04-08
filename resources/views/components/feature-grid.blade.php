@@ -5,31 +5,31 @@ $features = [
     'title' => 'Gestão de Veículos',
     'description' => 'Registre e controle veículos com facilidade, garantindo conformidade e disponibilidade.',
     'icon' => 'car',    // We'll reference Lucide icons by name, e.g. <x-lucide-car/>
-    'image' => Vite::asset('resources/images/dan-gold-kARZuSYMfrA-unsplash.jpg'),
+    'image' => asset('images/dan-gold-kARZuSYMfrA-unsplash.jpg'),
   ],
   [
     'title' => 'Gestao de Motoristas',
     'description' => 'Gerencie atribuições de motoristas, qualificações e escalas para operações sem interrupções.',
     'icon' => 'users',
-    'image' => Vite::asset('resources/images/nighthawstudio-020qf9WwYyI-unsplash.jpg'),
+    'image' => asset('images/nighthawstudio-020qf9WwYyI-unsplash.jpg'),
   ],
   [
     'title' => 'GPS Tracking',
     'description' => 'Rastreamento de veículos em tempo real para maior segurança e otimização de rotas.',
     'icon' => 'map-pin',
-    'image' => Vite::asset('resources/images/tobias-CyX3ZAti5DA-unsplash.jpg'),
+    'image' => asset('images/tobias-CyX3ZAti5DA-unsplash.jpg'),
   ],
   [
     'title' => 'Monitoramento de Vídeos',
     'description' => 'Monitore o interior e os arredores dos veículos para segurança e registro de incidentes.',
     'icon' => 'video',
-    'image' => Vite::asset('resources/images/liubomyr-vovchak-g3IWWNdUc7U-unsplash.jpg'),
+    'image' => asset('images/liubomyr-vovchak-g3IWWNdUc7U-unsplash.jpg'),
   ],
   [
     'title' => 'Gestão de Rotas',
     'description' => 'Coordene e rastreie os deslocamentos da sua frota de forma eficiente.',
     'icon' => 'truck',
-    'image' => Vite::asset('resources/images/oksana-gogu-me1WewCfdzc-unsplash.jpg'),
+    'image' => asset('images/oksana-gogu-me1WewCfdzc-unsplash.jpg'),
   ],
 ];
 @endphp
