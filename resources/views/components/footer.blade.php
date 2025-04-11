@@ -4,15 +4,15 @@
             &copy; {{ date('Y') }} {{ config('app.name') }}. Todos os direitos reservados.
         </span>
         <nav>
-            <ul class="flex space-x-4">
+            <ul class="flex space-x-4 text-gray-600 dark:text-gray-200">
                 <li>
-                    <a href="#" class="text-gray-600 hover:text-blue-500">Política de Privacidade</a>
+                    <a href="#" class="hover:text-blue-500">Política de Privacidade</a>
                 </li>
                 <li>
-                    <a href="#" class="text-gray-600 hover:text-blue-500">Termos de Serviço</a>
+                    <a href="#" class="hover:text-blue-500">Termos de Serviço</a>
                 </li>
                 <li>
-                    <a href="#" class="text-gray-600 hover:text-blue-500">Contato</a>
+                    <a href="#" class="hover:text-blue-500">Contato</a>
                 </li>
             </ul>
         </nav>

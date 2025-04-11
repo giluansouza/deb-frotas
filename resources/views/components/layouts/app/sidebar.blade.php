@@ -146,7 +146,7 @@
 
                 <flux:menu.radio.group>
                     <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>
-                        {{ __('Settings') }}</flux:menu.item>
+                        {{ __('Perfil') }}</flux:menu.item>
                 </flux:menu.radio.group>
 
                 <flux:menu.separator />
@@ -154,7 +154,7 @@
                 <form method="POST" action="{{ route('logout') }}" class="w-full">
                     @csrf
                     <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                        {{ __('Log Out') }}
+                        {{ __('Sair') }}
                     </flux:menu.item>
                 </form>
             </flux:menu>

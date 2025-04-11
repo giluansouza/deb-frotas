@@ -33,7 +33,7 @@
             <flux:navbar.item :href="route('login')" :current="request()->routeIs('login')" wire:navigate>
                 {{ __('Entrar') }}
             </flux:navbar.item>
-            <flux:navbar.item :href="route('register')" :current="request()->routeIs('register')" wire:navigate class="bg-gray-200">
+            <flux:navbar.item :href="route('register')" :current="request()->routeIs('register')" wire:navigate class="bg-gray-200 dark:bg-gray-700 rounded-md">
                 {{ __('Criar conta') }}
             </flux:navbar.item>
         @endif

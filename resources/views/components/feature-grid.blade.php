@@ -66,7 +66,7 @@ $features = [
                     </div>
                 </div>
                 <div class="px-4 pb-4">
-                    <p class="text-base text-gray-800">
+                    <p class="text-base text-gray-800 dark:text-zinc-300">
                         {{ $feature['description'] }}
                     </p>
                 </div>

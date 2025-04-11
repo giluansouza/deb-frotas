@@ -39,6 +39,14 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/termos-de-servico', function () {
+    return view('terms-of-service');
+})->name('terms');
+
+Route::get('/politica-de-privacidade', function () {
+    return view('privacy-policy');
+})->name('privacy');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

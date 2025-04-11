@@ -36,7 +36,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
 }; ?>
 
 <div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
+    <x-auth-header :title="__('Criar uma conta')" :description="__('Insira seus dados abaixo para criar sua conta')" />
 
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
@@ -45,18 +45,18 @@ new #[Layout('components.layouts.auth')] class extends Component {
         <!-- Name -->
         <flux:input
             wire:model="name"
-            :label="__('Name')"
+            :label="__('Nome completo')"
             type="text"
             required
             autofocus
             autocomplete="name"
-            :placeholder="__('Full name')"
+            :placeholder="__('Nome completo')"
         />
 
         <!-- Email Address -->
         <flux:input
             wire:model="email"
-            :label="__('Email address')"
+            :label="__('E-mail')"
             type="email"
             required
             autocomplete="email"
@@ -66,32 +66,42 @@ new #[Layout('components.layouts.auth')] class extends Component {
         <!-- Password -->
         <flux:input
             wire:model="password"
-            :label="__('Password')"
+            :label="__('Senha')"
             type="password"
             required
             autocomplete="new-password"
-            :placeholder="__('Password')"
+            :placeholder="__('Senha')"
         />
 
         <!-- Confirm Password -->
         <flux:input
             wire:model="password_confirmation"
-            :label="__('Confirm password')"
+            :label="__('Confirmar senha')"
             type="password"
             required
             autocomplete="new-password"
-            :placeholder="__('Confirm password')"
+            :placeholder="__('Confirmar senha')"
         />
+        <!-- Terms of Service -->
+        <div class="flex items-center gap-2">
+            <flux:checkbox wire:model="terms" required />
+            <span class="text-sm text-zinc-600 dark:text-zinc-400">
+                {{ __('Eu concordo com os') }}
+                <flux:link :href="route('terms')" target="_blank">{{ __('Termos de Serviço') }}</flux:link>
+                {{ __('e') }}
+                <flux:link :href="route('privacy')" target="_blank">{{ __('Política de Privacidade') }}</flux:link>
+            </span>
+        </div>
 
         <div class="flex items-center justify-end">
             <flux:button type="submit" variant="primary" class="w-full">
-                {{ __('Create account') }}
+                {{ __('Criar conta') }}
             </flux:button>
         </div>
     </form>
 
     <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-400">
-        {{ __('Already have an account?') }}
-        <flux:link :href="route('login')" wire:navigate>{{ __('Log in') }}</flux:link>
+        {{ __('Já tem uma conta?') }}
+        <flux:link :href="route('login')" wire:navigate>{{ __('Entrar') }}</flux:link>
     </div>
 </div>
