@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Dashboard;
 use App\Livewire\Drivers\Create;
 use App\Livewire\Drivers\Edit;
 use App\Livewire\Drivers\Index;
@@ -47,11 +48,10 @@ Route::get('/politica-de-privacidade', function () {
     return view('privacy-policy');
 })->name('privacy');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/', Dashboard::class)->name('dashboard');
+
     // VEHICLES
     Route::prefix('vehicles')->name('vehicle.')->group(function () {
         Route::get('/', VehiclesIndex::class)->name('index');

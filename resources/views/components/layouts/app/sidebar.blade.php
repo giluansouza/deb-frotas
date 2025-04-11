@@ -16,7 +16,7 @@
         <flux:navlist variant="outline">
             <flux:navlist.group :heading="__('Platform')" class="grid">
                 <flux:navlist.item icon="home" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}
+                    :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Início') }}
                 </flux:navlist.item>
 
                 @hasanyrole('admin|fleet_manager|unit_manager|garage_manager|driver')
