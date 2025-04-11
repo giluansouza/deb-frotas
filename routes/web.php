@@ -50,7 +50,7 @@ Route::get('/politica-de-privacidade', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('/', Dashboard::class)->name('dashboard');
+    Route::get('/inicio', Dashboard::class)->name('dashboard');
 
     // VEHICLES
     Route::prefix('vehicles')->name('vehicle.')->group(function () {
