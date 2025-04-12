@@ -24,6 +24,7 @@ use App\Livewire\Settings\RepairShop\Index as RepairShopIndex;
 use App\Livewire\Settings\RepairShop\Create as RepairShopCreate;
 use App\Livewire\Settings\RepairShop\Edit as RepairShopEdit;
 use App\Livewire\Settings\Users\Index as UserIndex;
+use App\Livewire\Settings\Users\Create as UserCreate;
 use App\Livewire\VehicleUsage\AuthorizeTable;
 use App\Livewire\VehicleUsage\Dispatch;
 use App\Livewire\VehicleUsage\RequestForm;
@@ -68,7 +69,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // DRIVERS
     Route::prefix('drivers')->name('driver.')->group(function () {
         Route::get('/', Index::class)->name('index');
-        Route::get('/create', Create::class)->name('create');
+        Route::get('/create/{user?}', Create::class)->name('create');
         Route::get('/{driver}/edit', Edit::class)->name('edit');
     });
 
@@ -107,7 +108,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::prefix('settings')->group(function () {
         Route::get('/users', UserIndex::class)->name('user.index');
-        Route::get('/users/create', UserIndex::class)->name('user.create');
+        Route::get('/users/create', UserCreate::class)->name('user.create');
         Route::get('/users/{user}/edit', UserIndex::class)->name('user.edit');
 
         Route::get('/fuelstations', FuelStationIndex::class)->name('fuelstation.index');

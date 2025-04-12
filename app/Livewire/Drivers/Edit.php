@@ -8,14 +8,17 @@ use Livewire\Component;
 class Edit extends Component
 {
     public $name, $register, $cpf, $rg;
-    public $number_cnh, $first_cnh, $validity_cnh, $category_cnh;
+    public $number_cnh, $first_cnh, $validity_cnh, $category_cnh,
+        $status;
 
     public Driver $driver;
+    public array $statuses = [];
 
     public function mount(Driver $driver)
     {
         $this->driver = $driver;
 
+        $this->status = $driver->status;
         $this->name = $driver->name;
         $this->register = $driver->register;
         $this->cpf = $driver->cpf;
@@ -24,11 +27,16 @@ class Edit extends Component
         $this->first_cnh = $driver->first_cnh?->format('Y-m-d');
         $this->validity_cnh = $driver->validity_cnh?->format('Y-m-d');
         $this->category_cnh = $driver->category_cnh;
+
+        $this->statuses = collect(\App\DriverStatus::cases())
+            ->mapWithKeys(fn($status) => [$status->value => $status->label()])
+            ->toArray();
     }
 
     protected function rules()
     {
         return [
+            'status' => 'required|in:active,inactive',
             'name' => 'required|string|max:255',
             'register' => 'required|string|max:50',
             'cpf' => 'required|string|max:14|unique:drivers,cpf,' . $this->driver->id,

@@ -54,14 +54,15 @@ class UserSeeder extends Seeder
         );
         $garageManager->assignRole('garage_manager');
 
-        // Motorista
-        $driver = User::firstOrCreate(
-            ['email' => 'motorista@frotas.test'],
-            [
-                'name' => 'Motorista',
-                'password' => Hash::make('123456')
-            ]
-        );
-        $driver->assignRole('driver');
+        for ($i = 1; $i <= 10; $i++) {
+            $user = User::firstOrCreate(
+                ['email' => "motorista{$i}@frotas.test"],
+                [
+                    'name' => "Motorista {$i}",
+                    'password' => Hash::make('123456'),
+                ]
+            );
+            $user->assignRole('driver');
+        }
     }
 }

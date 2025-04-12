@@ -2,7 +2,7 @@
     <div class="flex justify-between border-b border-gray-200 pb-3 mb-5">
         <h2 class="text-3xl font-semibold text-gray-800">Motoristas</h2>
         @hasanyrole('admin|fleet_manager')
-            <a href="{{ route("driver.create")}}" class="bg-blue-500 cursor-pointer hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            <a href="{{ route("user.create")}}" class="bg-blue-500 cursor-pointer hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                 Novo motorista
             </a>
         @endhasanyrole
@@ -21,8 +21,9 @@
                     <th class="px-4 py-2 font-medium text-gray-600">Nome</th>
                     <th class="px-4 py-2 font-medium text-gray-600">CPF</th>
                     <th class="px-4 py-2 font-medium text-gray-600">CNH</th>
-                    <th class="px-4 py-2 font-medium text-gray-600">Val CNH</th>
                     <th class="px-4 py-2 font-medium text-gray-600">Cat CNH</th>
+                    <th class="px-4 py-2 font-medium text-gray-600">Val CNH</th>
+                    <th class="px-4 py-2 font-medium text-gray-600">Status</th>
                     <th class="px-4 py-2 font-medium text-gray-600"></th>
                 </tr>
             </thead>
@@ -47,6 +48,13 @@
                                     {{ $driver->validity_cnh ? $driver->validity_cnh->format('d/m/Y') : 'Sem validade' }}
                                 </span>
                             @endif
+                        </td>
+                        <td class="px-4 py-3 text-gray-700">
+                            <x-badge
+                                :text="$driver->status->label()"
+                                :color="$driver->status->color()"
+                                bold="true"
+                            />
                         </td>
                         <td class="px-4 py-3">
                             <a href="{{ route('driver.edit', $driver) }}" class="text-blue-500 hover:text-blue-700">Editar</a>

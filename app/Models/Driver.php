@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DriverStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,11 +22,14 @@ class Driver extends Model
         'link',
         'first_cnh',
         'validity_cnh',
+        'status',
+        'user_id',
     ];
 
     protected $casts = [
         'first_cnh' => 'date',
         'validity_cnh' => 'date',
+        'status' => DriverStatus::class,
     ];
 
     public function getCnhWillExpireSoonAttribute()

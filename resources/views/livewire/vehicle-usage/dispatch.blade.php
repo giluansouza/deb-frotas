@@ -25,7 +25,7 @@
                         <td class="p-2">{{ $usage->vehicle?->plate }}</td>
                         <td class="p-2">{{ $usage->destination }}</td>
                         <td class="p-2">{{ $usage->unit_name }}</td>
-                        <td class="p-2">
+                        <td class="p-2 flex justify-center">
                             <button wire:click="setUsage({{ $usage->id }})"
                                 class="text-blue-600 hover:underline flex gap-1 justify-center items-center">
                                 <flux:icon.truck class="size-5" /> Liberar

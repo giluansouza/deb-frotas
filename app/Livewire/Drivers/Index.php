@@ -3,8 +3,10 @@
 namespace App\Livewire\Drivers;
 
 use App\Models\Driver;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Title('Motoristas')]
 class Index extends Component
 {
     public function mount()

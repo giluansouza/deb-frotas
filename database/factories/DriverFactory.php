@@ -19,6 +19,8 @@ class DriverFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => null,
+            'status' => 'active',
             'name' => $this->faker->name(),
             'cpf' => $this->faker->numerify('###.###.###-##'),
             'rg' => $this->faker->numerify('##########'),

@@ -1,4 +1,4 @@
-<x-layouts.app.sidebar :title="'Frotas | ' . ($title ?? null)">
+<x-layouts.app.sidebar :title="'FleetPro | ' . ($title ?? null)">
     <flux:main>
         {{ $slot }}
     </flux:main>

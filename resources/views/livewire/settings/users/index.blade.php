@@ -1,6 +1,6 @@
 <div class="max-w-7xl mx-auto p-6 bg-zinc-100 rounded-xl shadow-md">
     <div class="flex justify-between border-b border-gray-200 pb-3 mb-5">
-        <h2 class="text-3xl font-semibold text-gray-800">Oficinas</h2>
+        <h2 class="text-3xl font-semibold text-gray-800">Usuários</h2>
 
         <a href="{{ route('user.create') }}" class="flex gap-1 items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             <flux:icon.plus class="w-5 h-5" /> Novo Usuário

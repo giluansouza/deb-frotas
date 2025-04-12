@@ -5,31 +5,60 @@
 
     <div class="grid auto-rows-min gap-4 md:grid-cols-3">
         {{-- Card Drivers --}}
-        <div class="bg-blue-50 dark:bg-zinc-600 rounded-lg shadow-md p-4">
-            <h2 class="text-xl font-bold mb-4 text-blue-900 dark:text-blue-100">Motoristas Disponíveis</h2>
+        <div class="bg-zinc-50 dark:bg-zinc-700 rounded-2xl shadow p-6 flex items-center gap-4">
+            <div class="p-3 rounded-full bg-amber-100 dark:bg-amber-800/20">
+                <flux:icon.id-card class="w-6 h-6" />
+            </div>
 
+            <div class="flex-1">
+                <h2 class="text-sm font-medium text-zinc-600 dark:text-zinc-300 mb-1">Motoristas Ativos</h2>
+
+                @if ($driversActive === 0)
+                    <p class="text-zinc-400 text-sm">Nenhuma</p>
+                @else
+                    <p class="text-2xl font-semibold text-zinc-800">Total: {{ $driversActive }}</p>
+                @endif
+            </div>
         </div>
 
         {{-- Card Vehicles --}}
-        <div class="bg-blue-50 dark:bg-zinc-600 rounded-lg shadow-md p-4">
-            <h2 class="text-xl font-bold mb-4 text-blue-900 dark:text-blue-100">Veículos disponíveis</h2>
+        <div class="bg-zinc-50 dark:bg-zinc-700 rounded-2xl shadow p-6 flex items-center gap-4">
+            <div class="p-3 rounded-full bg-amber-100 dark:bg-amber-800/20">
+                <flux:icon.truck class="w-6 h-6" />
+            </div>
 
+            <div class="flex-1">
+                <h2 class="text-sm font-medium text-zinc-600 dark:text-zinc-300 mb-1">Veículos Ativos</h2>
+
+                @if ($vehiclesActive === 0)
+                    <p class="text-zinc-400 text-sm">Nenhum</p>
+                @else
+                    <p class="text-2xl font-semibold text-zinc-800">Total: {{ $vehiclesActive }}</p>
+                @endif
+            </div>
         </div>
 
-        {{-- Card Vehicles --}}
-        <div class="bg-blue-50 dark:bg-zinc-600 rounded-lg shadow-md p-4">
-            <h2 class="text-lg font-bold mb-4 text-blue-900 dark:text-blue-100">Manutenções agendadas</h2>
-            @if ($scheduledMaintenance == 0)
-                <p class="text-gray-500">Nenhuma manutenção agendada.</p>
-            @else
-                <span class="text-2xl font-bold text-blue-800 dark:text-blue-50">Total: {{$scheduledMaintenance}}</span>
-            @endif
+        {{-- Card Maintenance --}}
+        <div class="bg-zinc-50 dark:bg-zinc-700 rounded-2xl shadow p-6 flex items-center gap-4">
+            <div class="p-3 rounded-full bg-amber-100 dark:bg-amber-800/20">
+                <flux:icon.wrench class="w-6 h-6" />
+            </div>
+
+            <div class="flex-1">
+                <h2 class="text-sm font-medium text-zinc-600 dark:text-zinc-300 mb-1">Manutenções Agendadas</h2>
+
+                @if ($scheduledMaintenance === 0)
+                    <p class="text-zinc-400 text-sm">Nenhuma</p>
+                @else
+                    <p class="text-2xl font-semibold text-zinc-800">Total: {{ $scheduledMaintenance }}</p>
+                @endif
+            </div>
         </div>
     </div>
 
     {{-- Card Drivers License Expiring --}}
-    <div class="bg-blue-50 dark:bg-zinc-600 rounded-lg shadow-md p-4">
-        <h2 class="text-xl font-bold mb-4 text-blue-900 dark:text-blue-100">CNH próximas do vencimento</h2>
+    <div <div class="bg-zinc-50 dark:bg-zinc-700 rounded-2xl shadow p-6 items-center gap-4">
+        <h2 class="text-xl font-medium text-zinc-600 dark:text-zinc-300 mb-1">CNH próximas do vencimento</h2>
         @if($driversExpiring->isEmpty())
             <p class="text-gray-500">Nenhuma CNH vencendo nos próximos 90 dias.</p>
         @else
@@ -73,8 +102,8 @@
     </div>
 
     {{-- Card Vehicles Maintenance --}}
-    <div class="bg-blue-50 dark:bg-zinc-600 rounded-lg shadow-md p-4">
-        <h2 class="text-xl font-bold mb-4 text-blue-900">Manutenções agendadas</h2>
+    <div class="bg-zinc-50 dark:bg-zinc-700 rounded-2xl shadow p-6 items-center gap-4">
+        <h2 class="text-xl font-medium text-zinc-600 dark:text-zinc-300 mb-1">Próximas Manutenções</h2>
         @if($vehiclesForMaintenance->isEmpty())
             <p class="text-gray-500">Nenhuma manutenção programada nos próximos 30 dias.</p>
         @else

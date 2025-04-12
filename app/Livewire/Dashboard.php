@@ -17,6 +17,7 @@ class Dashboard extends Component
     public $driversActive;
     public $scheduledMaintenance;
 
+
     public function mount()
     {
         $today = Carbon::today();
@@ -29,10 +30,11 @@ class Dashboard extends Component
         $this->vehiclesForMaintenance = Maintenance::where('start_date', '<=', $today->addDays(30))
             ->orderBy('start_date', 'asc')
             ->with(['vehicle', 'repairShop'])
+            ->take(10)
             ->get();
 
-        // $this->vehiclesActive = Vehicle::where('status', 'active')->count();
-        // $this->driversActive = Driver::where('status', 'active')->count();
+        $this->vehiclesActive = Vehicle::where('conservation_state', '!=', 'inactive')->count();
+        $this->driversActive = Driver::where('status', 'active')->count();
         $this->scheduledMaintenance = Maintenance::where('status', MaintenanceStatus::Pending)->count();
     }
 
@@ -41,9 +43,6 @@ class Dashboard extends Component
         return view('livewire.dashboard', [
             'driversExpiring' => $this->driversExpiring,
             'vehiclesForMaintenance' => $this->vehiclesForMaintenance,
-            // 'vehiclesActive' => $this->vehiclesActive,
-            // 'driversActive' => $this->driversActive,
-            'scheduledMaintenance' => $this->scheduledMaintenance,
         ]);
     }
 }

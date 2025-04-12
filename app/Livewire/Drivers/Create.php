@@ -3,16 +3,29 @@
 namespace App\Livewire\Drivers;
 
 use App\Models\Driver;
+use App\Models\User;
 use Livewire\Component;
 
 class Create extends Component
 {
-    public $name, $register, $cpf, $rg;
+    public $name, $register, $cpf, $rg, $status;
     public $number_cnh, $first_cnh, $validity_cnh, $category_cnh;
+
+    public ?User $user = null;
+
+    public function mount(?User $user = null)
+    {
+        $this->user = $user;
+
+        if ($user) {
+            $this->name = $user->name;
+        }
+    }
 
     protected function rules()
     {
         return [
+            'status' => 'required|in:active,inactive',
             'name' => 'required|string|max:255',
             'register' => 'required|string|max:50',
             'cpf' => 'required|string|max:14|unique:drivers,cpf',
@@ -27,11 +40,13 @@ class Create extends Component
     protected function messages()
     {
         return [
+            'status.required' => 'O status do motorista é obrigatório.',
             'name.required' => 'O nome do motorista é obrigatório.',
             'registration_number.required' => 'A matrícula é obrigatória.',
             'cpf.required' => 'O CPF é obrigatório.',
             'cpf.unique' => 'Este CPF já está cadastrado.',
             'rg.required' => 'O RG é obrigatório.',
+            'rg.unique' => 'Este RG já está cadastrado.',
             'number_cnh.required' => 'O número da CNH é obrigatório.',
             'first_cnh.required' => 'A data da 1ª habilitação é obrigatória.',
             'first_cnh.date' => 'A data da 1ª habilitação deve ser válida.',
@@ -59,13 +74,26 @@ class Create extends Component
     {
         $validated = $this->validate();
 
-        Driver::create($validated);
+        Driver::create([
+            ...$validated,
+            'user_id' => $this->user?->id,
+        ]);
+
+        if ($this->user) {
+            $this->user->assignRole('driver');
+        }
 
         return redirect()->route('driver.index')->with('success', 'Motorista cadastrado com sucesso!');
     }
 
     public function render()
     {
-        return view('livewire.drivers.create');
+        $statuses = collect(\App\DriverStatus::cases())
+            ->mapWithKeys(fn($status) => [$status->value => $status->label()])
+            ->toArray();
+
+        return view('livewire.drivers.create', [
+            'statuses' => $statuses,
+        ]);
     }
 }
